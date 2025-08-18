@@ -65,14 +65,31 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <div className=" h-screen w-screen bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900">
       <World
         globeConfig={{
-          globeColor: "#4169E1",
-          autoRotate: true,
-          autoRotateSpeed: 0.5,
-        }}
+  globeColor: "#000000",
+  showAtmosphere: true,
+  atmosphereColor: "#4169E1",
+  atmosphereAltitude: 0.25,
+  emissive: "FFFFFF",
+  emissiveIntensity: 0.1,
+  shininess: 0.9,
+  polygonColor: "rgba(255,255,255,0.7)",
+  ambientLight: "#4169E1",
+  directionalLeftLight: "#4169E1",
+  directionalTopLight: "#4169E1",
+  pointLight: "#4169E1",
+  arcTime: 2000,
+  arcLength: 0.9,
+  rings: 1,
+  maxRings: 3,
+  autoRotate: true,
+  autoRotateSpeed: 0.5,
+}}
         data={sampleData}
       />
+      </div>
        <main className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900">
         <RegisterSection />
       </main>
