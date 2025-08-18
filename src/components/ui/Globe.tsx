@@ -57,12 +57,13 @@ export type GlobeConfig = {
 
 interface WorldProps {
   globeConfig: GlobeConfig;
-  data: Position[];
+  data: Position[]; // Existing arcs data
+  points?: { lat: number; lng: number; color: string; size?: number }[]; // New points data
 }
 
 let numbersOfRings = [0];
 
-export function Globe({ globeConfig, data }: WorldProps) {
+export function Globe({ globeConfig, data, points }: WorldProps) { // Add points to props
   const globeRef = useRef<ThreeGlobe | null>(null);
   const groupRef = useRef();
   const [isInitialized, setIsInitialized] = useState(false);
@@ -117,21 +118,22 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
   // Build data when globe is initialized or when data changes
   useEffect(() => {
-    if (!globeRef.current || !isInitialized || !data) return;
+    if (!globeRef.current || !isInitialized) return;
 
+    // Existing arcs logic
     const arcs = data;
-    let points = [];
+    let arcPoints = []; // Renamed to avoid conflict
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
       const rgb = hexToRgb(arc.color) as { r: number; g: number; b: number };
-      points.push({
+      arcPoints.push({
         size: defaultProps.pointSize,
         order: arc.order,
         color: arc.color,
         lat: arc.startLat,
         lng: arc.startLng,
       });
-      points.push({
+      arcPoints.push({
         size: defaultProps.pointSize,
         order: arc.order,
         color: arc.color,
@@ -141,7 +143,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
     }
 
     // remove duplicates for same lat and lng
-    const filteredPoints = points.filter(
+    const filteredArcPoints = arcPoints.filter( // Renamed
       (v, i, a) =>
         a.findIndex((v2) =>
           ["lat", "lng"].every(
@@ -164,21 +166,32 @@ export function Globe({ globeConfig, data }: WorldProps) {
       .arcStartLat((d) => (d as { startLat: number }).startLat * 1)
       .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
       .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
-      .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
+      .arcEndLng((d) => (d as { endLat: number }).endLng * 1)
       .arcColor((e: any) => (e as { color: string }).color)
       .arcAltitude((e) => (e as { arcAlt: number }).arcAlt * 1)
-      .arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
       .arcDashLength(defaultProps.arcLength)
       .arcDashInitialGap((e) => (e as { order: number }).order * 1)
       .arcDashGap(15)
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
-    globeRef.current
-      .pointsData(filteredPoints)
-      .pointColor((e) => (e as { color: string }).color)
-      .pointsMerge(true)
-      .pointAltitude(0.0)
-      .pointRadius(2);
+    // New points logic
+    if (points) {
+      globeRef.current
+        .pointsData(points)
+        .pointColor((e) => (e as { color: string }).color)
+        .pointsMerge(true)
+        .pointAltitude(0.0)
+        .pointRadius((e) => (e as { size: number }).size || defaultProps.pointSize); // Use size from point data or default
+    } else {
+      // If no specific points are provided, use the filtered arc points as before
+      globeRef.current
+        .pointsData(filteredArcPoints)
+        .pointColor((e) => (e as { color: string }).color)
+        .pointsMerge(true)
+        .pointAltitude(0.0)
+        .pointRadius(2);
+    }
+
 
     globeRef.current
       .ringsData([])
@@ -191,6 +204,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
   }, [
     isInitialized,
     data,
+    points, // Add points to dependency array
     defaultProps.pointSize,
     defaultProps.showAtmosphere,
     defaultProps.atmosphereColor,
@@ -270,7 +284,7 @@ export function World(props: WorldProps) {
       <Globe {...props} />
       <OrbitControls
         enablePan={false}
-        enableZoom={true}
+        enableZoom={false}
         minDistance={cameraZ}
         maxDistance={cameraZ}
         autoRotateSpeed={2}
