@@ -32,7 +32,7 @@ const cards: Card[] = [
     title: "Organizer",
     description: "Design tracks, manage logistics, curate mentors, and keep the energy flowing smoothly.",
     accent: "from-emerald-400/30 via-emerald-400/10 to-transparent",
-    href: "/apply/organizer",
+    href: "/organizer",
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7 text-emerald-300">
         <path
