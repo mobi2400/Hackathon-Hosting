@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import RegisterSection from "@/components/RegisterSection";
 import { World } from "@/components/ui/Globe";
 
+
 export default function Home() {
   const sampleData = [
   { order: 1, startLat: 34.28, startLng: 69.11, endLat: 41.18, endLng: 19.49, arcAlt: 0.3, color: '#FF0000' },
@@ -63,29 +64,29 @@ export default function Home() {
       <Navbar />
       <div className=" h-screen w-screen bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900">
        <h1 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-bold text-white [text-shadow:1px_1px_0_theme(colors.blue.500),2px_2px_0_theme(colors.blue.600),3px_3px_0_theme(colors.blue.700)]">TECH MEETS INNOVATION</h1>
-      <World
-        globeConfig={{
-  globeColor: "#060606",
-  showAtmosphere: true,
-  atmosphereColor: "#4169E1",
-  atmosphereAltitude: 0.25,
-  emissive: "FFFFFF",
-  emissiveIntensity: 0.1,
-  shininess: 0.9,
-  polygonColor: "#FFA500",
-  ambientLight: "#4169E1",
-  directionalLeftLight: "#4169E1",
-  directionalTopLight: "#4169E1",
-  pointLight: "#4169E1",
-  arcTime: 2000,
-  arcLength: 0.9,
-  rings: 1,
-  maxRings: 3,
-  autoRotate: true,
-  autoRotateSpeed: 0.5,
-}}
-        data={sampleData}
-      />
+     <World
+  globeConfig={{
+    globeColor: "#1E3A8A", // Deep blue
+    showAtmosphere: true,
+    atmosphereColor: "#4169E1",
+    atmosphereAltitude: 0.25,
+    emissive: "FFFFFF",
+    emissiveIntensity: 0.1,
+    shininess: 0.9,
+    polygonColor: "#FFFFFF", // White polygons
+    ambientLight: "#FFFFFF", // Brighter ambient light
+    directionalLeftLight: "#FFFFFF", // Brighter directional light
+    directionalTopLight: "#FFFFFF", // Brighter directional light
+    pointLight: "#FFFFFF", // Brighter point light
+    arcTime: 2000, // Faster arc animation
+    arcLength: 0.5, // Shorter arc dashes
+    rings: 5, // More rings
+    maxRings: 10, // More max rings
+    autoRotate: true,
+    autoRotateSpeed: 2.0, // Faster globe rotation
+  }}
+  data={sampleData}
+/>
       </div>
        <main className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-950 to-gray-900">
         <RegisterSection />

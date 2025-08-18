@@ -169,9 +169,9 @@ export function Globe({ globeConfig, data, points }: WorldProps) { // Add points
       .arcEndLng((d) => (d as { endLat: number }).endLng * 1)
       .arcColor((e: any) => (e as { color: string }).color)
       .arcAltitude((e) => (e as { arcAlt: number }).arcAlt * 1)
-      .arcDashLength(defaultProps.arcLength)
-      .arcDashInitialGap((e) => (e as { order: number }).order * 1)
-      .arcDashGap(15)
+      .arcDashLength(1) // Make arcs solid
+      .arcDashInitialGap(0) // Start animation from the beginning
+      .arcDashGap(0) // No gap between dashes
       .arcDashAnimateTime(() => defaultProps.arcTime);
 
     // New points logic
@@ -254,7 +254,9 @@ export function WebGLRendererConfig() {
   useEffect(() => {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
-    gl.setClearColor(0xffaaff, 0);
+    gl.shadowMap.enabled = true;
+    gl.setClearColor(0x0a0a2a, 0);
+    
   }, []);
 
   return null;
