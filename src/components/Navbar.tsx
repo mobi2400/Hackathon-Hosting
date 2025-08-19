@@ -1,27 +1,52 @@
 "use client";
-import { useState } from 'react';
-import Link from 'next/link';
+import {useState} from "react";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
-    { href: '/', label: 'Register' },
-    { href: '/about', label: 'About' },
-    { href: '/achievements', label: 'Achievement' },
+    {href: "/#register", label: "Register"},
+    {href: "/about", label: "About"},
+    {href: "/achievements", label: "Achievement"},
   ];
 
+  const handleLinkClick = (href: string) => {
+    if (href.startsWith("/#")) {
+      const id = href.split("#")[1];
+      if (
+        (pathname === "/" || pathname === "/#") &&
+        typeof window !== "undefined"
+      ) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({behavior: "smooth", block: "start"});
+          setIsOpen(false);
+          return;
+        }
+      }
+    }
+    setIsOpen(false);
+  };
+
   return (
-    <nav className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center relative">
+    <nav className="bg-gray-800/80 backdrop-blur text-white p-4 border-b border-white/10 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         <div className="text-xl font-bold">
           <Link href="/">Logo</Link>
         </div>
 
-        <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-8">
+        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 space-x-8">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <span className="hover:text-gray-400 transition-colors duration-300">{link.label}</span>
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => handleLinkClick(link.href)}
+              className="hover:text-gray-300 transition-colors duration-300"
+            >
+              {link.label}
             </Link>
           ))}
         </div>
@@ -60,8 +85,12 @@ const Navbar = () => {
           <ul className="flex flex-col items-center space-y-2">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href}>
-                  <span className="block px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300" onClick={() => setIsOpen(false)}>{link.label}</span>
+                <Link
+                  href={link.href}
+                  onClick={() => handleLinkClick(link.href)}
+                  className="block px-4 py-2 rounded hover:bg-gray-700 transition-colors duration-300"
+                >
+                  {link.label}
                 </Link>
               </li>
             ))}

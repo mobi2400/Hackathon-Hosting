@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { JSX } from "react";
+import {JSX} from "react";
 
 type Card = {
   id: string;
@@ -15,7 +15,8 @@ const cards: Card[] = [
   {
     id: "participant",
     title: "Participant",
-    description: "Build innovative solutions, collaborate with peers, iterate fast, and ship a polished project.",
+    description:
+      "Build innovative solutions, collaborate with peers, iterate fast, and ship a polished project.",
     accent: "from-indigo-400/30 via-indigo-400/10 to-transparent",
     href: "/apply/participant",
     icon: (
@@ -30,7 +31,8 @@ const cards: Card[] = [
   {
     id: "organizer",
     title: "Organizer",
-    description: "Design tracks, manage logistics, curate mentors, and keep the energy flowing smoothly.",
+    description:
+      "Design tracks, manage logistics, curate mentors, and keep the energy flowing smoothly.",
     accent: "from-emerald-400/30 via-emerald-400/10 to-transparent",
     href: "/organizer",
     icon: (
@@ -45,7 +47,8 @@ const cards: Card[] = [
   {
     id: "judge",
     title: "Judge",
-    description: "Evaluate submissions, give actionable feedback, and help surface projects with real impact.",
+    description:
+      "Evaluate submissions, give actionable feedback, and help surface projects with real impact.",
     accent: "from-amber-400/40 via-amber-400/10 to-transparent",
     href: "/apply/judge",
     icon: (
@@ -61,7 +64,10 @@ const cards: Card[] = [
 
 const RegisterSection = () => {
   return (
-    <section className="relative w-full py-24 px-6 md:px-12 lg:px-20">
+    <section
+      id="register"
+      className="relative w-full py-24 px-6 md:px-12 lg:px-20 scroll-mt-28"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[70rem] h-[70rem] rounded-full bg-gradient-to-b from-gray-700/15 via-gray-900/0 to-transparent blur-3xl" />
         <div className="absolute bottom-0 right-0 w-[40rem] h-[40rem] translate-x-1/4 translate-y-1/4 rounded-full bg-gradient-to-tr from-gray-600/10 to-transparent blur-2xl" />
@@ -75,7 +81,8 @@ const RegisterSection = () => {
             </span>
           </h1>
           <p className="mt-6 max-w-2xl text-sm md:text-base text-gray-400">
-            Choose how you want to be part of the experience. Each path unlocks a different layer of impact.
+            Choose how you want to be part of the experience. Each path unlocks
+            a different layer of impact.
           </p>
         </header>
 
@@ -88,7 +95,9 @@ const RegisterSection = () => {
             >
               <div className="relative h-full w-full rounded-[1.05rem] bg-gradient-to-br from-gray-950/60 via-gray-900/40 to-gray-950/60 p-6 flex flex-col">
                 <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className={`absolute -top-10 -right-10 w-52 h-52 rounded-full blur-3xl bg-gradient-to-br ${card.accent}`} />
+                  <div
+                    className={`absolute -top-10 -right-10 w-52 h-52 rounded-full blur-3xl bg-gradient-to-br ${card.accent}`}
+                  />
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -98,7 +107,9 @@ const RegisterSection = () => {
                       {card.icon}
                     </div>
                   </div>
-                  <h2 className="text-xl font-medium text-white">{card.title}</h2>
+                  <h2 className="text-xl font-medium text-white">
+                    {card.title}
+                  </h2>
                 </div>
 
                 <p className="mt-5 text-sm leading-relaxed text-gray-400 flex-1">
