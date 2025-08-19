@@ -10,7 +10,7 @@ const Navbar = () => {
   const navLinks = [
     {href: "/#register", label: "Register"},
     {href: "/about", label: "About"},
-    {href: "/achievements", label: "Achievement"},
+    {href: "/hackathons", label: "Hackathons"},
   ];
 
   const handleLinkClick = (href: string) => {

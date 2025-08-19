@@ -18,7 +18,7 @@ const cards: Card[] = [
     description:
       "Build innovative solutions, collaborate with peers, iterate fast, and ship a polished project.",
     accent: "from-indigo-400/30 via-indigo-400/10 to-transparent",
-    href: "/apply/participant",
+    href: "/participant",
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7 text-indigo-300">
         <path
@@ -50,7 +50,7 @@ const cards: Card[] = [
     description:
       "Evaluate submissions, give actionable feedback, and help surface projects with real impact.",
     accent: "from-amber-400/40 via-amber-400/10 to-transparent",
-    href: "/apply/judge",
+    href: "/judge",
     icon: (
       <svg viewBox="0 0 24 24" className="w-7 h-7 text-amber-300">
         <path
